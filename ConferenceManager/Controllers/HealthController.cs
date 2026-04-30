@@ -2,11 +2,14 @@
 
 namespace ConferenceManager.Controllers
 {
+    [ApiController]
+    [Route("/health")]
     public class HealthController : Controller
     {
-        public IActionResult Index()
+        [HttpGet]
+        public IActionResult GetHealth()
         {
-            return View();
+            return Ok("Ok lets go");
         }
     }
 }
