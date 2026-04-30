@@ -10,9 +10,9 @@ namespace ConferenceManager.Services
     }
     public class EventService : IEventService
     {
-        private readonly EventRepo _eventRepo;
+        private readonly IEventRepo _eventRepo;
 
-        public EventService(EventRepo eventRepo)
+        public EventService(IEventRepo eventRepo)
         {
             _eventRepo = eventRepo;
 

@@ -1,3 +1,6 @@
+using ConferenceManager.Repositories;
+using ConferenceManager.Services;
+
 namespace ConferenceManager
 {
     public class Program
@@ -8,6 +11,8 @@ namespace ConferenceManager
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddScoped<IEventRepo, EventRepo>();
+            builder.Services.AddScoped<IEventService, EventService>();
             var app = builder.Build();
 
             if (app.Environment.IsDevelopment())
