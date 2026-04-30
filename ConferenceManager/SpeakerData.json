@@ -1,0 +1,34 @@
+[
+  {
+    "SpeakerId": 1,
+    "EventId": 1
+  },
+  {
+    "SpeakerId": 2,
+    "EventId": 1
+  },
+  {
+    "SpeakerId": 3,
+    "EventId": 2
+  },
+  {
+    "SpeakerId": 4,
+    "EventId": 7
+  },
+  {
+    "SpeakerId": 5,
+    "EventId": 1
+  },
+  {
+    "SpeakerId": 6,
+    "EventId": 6
+  },
+  {
+    "SpeakerId": 7,
+    "EventId": 7
+  },
+  {
+    "SpeakerId": 8,
+    "EventId": 12
+  }
+]

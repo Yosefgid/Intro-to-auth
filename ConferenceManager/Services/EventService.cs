@@ -7,6 +7,8 @@ namespace ConferenceManager.Services
     {
         public List<Event> GetEvents();
         public Event GetEventById(int id);
+
+        public Event AddEvent(Event e);
     }
     public class EventService : IEventService
     {
@@ -24,6 +26,11 @@ namespace ConferenceManager.Services
         public Event GetEventById(int id)
         {
             return _eventRepo.FetchEventbyId(id);
+        }
+
+        public Event AddEvent(Event e)
+        {
+            return _eventRepo.AddEvent(e);  
         }
     }
 }

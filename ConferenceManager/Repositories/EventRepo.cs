@@ -1,5 +1,7 @@
-﻿using System.Text.Json;
+﻿using System.Collections;
+using System.Text.Json;
 using ConferenceManager.Models;
+using Microsoft.Extensions.Options;
 
 namespace ConferenceManager.Repositories
 {
@@ -7,21 +9,40 @@ namespace ConferenceManager.Repositories
     {
         public List<Event> FetchEvents();
         public Event FetchEventbyId(int id);
+
+        public Event AddEvent(Event e);
     }
 
     public class EventRepo : IEventRepo
     {
-        private readonly string filePath = "Data/EventData.json";
+        private readonly string filePath = "EventData.json";
+
+        JsonSerializerOptions options = new JsonSerializerOptions{PropertyNameCaseInsensitive = true , WriteIndented = true};
 
         public List<Event> FetchEvents()
         {
             var json = File.ReadAllText(filePath);
-            return JsonSerializer.Deserialize<List<Event>>(json);
+            return JsonSerializer.Deserialize<List<Event>>(json, options); 
 
         }
         public Event FetchEventbyId(int id )
         {
             return FetchEvents().FirstOrDefault(e => e.Id == id);
+        }
+
+        public Event AddEvent(Event e)
+        {
+
+            var events = FetchEvents();
+            
+
+            e.Id = events.Any() ? events.Max(e => e.Id) + 1 : 1;
+            events.Add(e);
+
+            string result = JsonSerializer.Serialize(events, options);
+            File.WriteAllText(filePath, result);
+
+            return e;
         }
     }
 }

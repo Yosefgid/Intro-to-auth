@@ -1,5 +1,7 @@
 ﻿using ConferenceManager.Services;
 using Microsoft.AspNetCore.Mvc;
+using ConferenceManager.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ConferenceManager.Controllers
 {
@@ -18,11 +20,19 @@ namespace ConferenceManager.Controllers
         {
             return Ok(_eventService.GetEvents());
         }
-        [HttpGet("{id")]
+        [HttpGet("{id}")]
         public IActionResult GetEventById(int id)
         {
             var eventbyID = _eventService.GetEventById(id);
             return Ok(eventbyID);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public IActionResult MakeEvent(Event e)
+        {
+            var createdEvent = _eventService.AddEvent(e);   
+            return CreatedAtAction(nameof(GetEventById) , new {id = createdEvent.Id} , createdEvent);
         }
     }
 }
