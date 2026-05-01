@@ -2,26 +2,26 @@
   {
     "AttendeeId": 1,
     "EventId": 1,
-    "UserId": 101
+    "UserId": "101"
   },
   {
     "AttendeeId": 2,
     "EventId": 1,
-    "UserId": 102
+    "UserId": "102"
   },
   {
     "AttendeeId": 3,
     "EventId": 2,
-    "UserId": 101
+    "UserId": "101"
   },
   {
     "AttendeeId": 4,
     "EventId": 3,
-    "UserId": 103
+    "UserId": "103"
   },
   {
     "AttendeeId": 5,
     "EventId": 2,
-    "UserId": 104
+    "UserId": "104"
   }
 ]

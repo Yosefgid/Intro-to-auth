@@ -21,6 +21,11 @@ namespace ConferenceManager.Controllers
 
         [Authorize(Roles = "Admin")]
         [HttpGet]
+        //public IActionResult GetAllAttendees()
+        //{
+        //    var claims = HttpContext.User.Claims.Select(c => new { c.Type, c.Value });
+        //    return Ok(claims);
+        //}
         public IActionResult GetAllAttendees()
         {
 
@@ -43,7 +48,7 @@ namespace ConferenceManager.Controllers
             var userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var attendee = _attendeeService.FetchAttendeeById(attendeeId);
             if (attendee == null) return NotFound($"There is no Attendee with this associated id{attendeeId}");
-            if(attendee.UserId != int.Parse(userId))
+            if(attendee.UserId != userId)
             {
                 return Forbid();
             }
@@ -61,7 +66,7 @@ namespace ConferenceManager.Controllers
             {
                 return NotFound("event could not be found for this associated AttendeeId");
             }
-            newAttendee.UserId = int.Parse(userId);
+            newAttendee.UserId = userId;
             var created = _attendeeService.AddAttendee(newAttendee);
             return CreatedAtAction(nameof(GetAttendeeById), new { id = newAttendee.AttendeeId }, newAttendee);
         }
