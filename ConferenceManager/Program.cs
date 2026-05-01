@@ -42,7 +42,7 @@ namespace ConferenceManager
                     ValidateLifetime = false,
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(key),
-                    RoleClaimType = "roles",
+                    //RoleClaimType = "roles",
                 
                 };
             });
@@ -57,8 +57,8 @@ namespace ConferenceManager
 
 
             app.UseHttpsRedirection();
-            app.UseAuthorization();
             app.UseAuthentication();
+            app.UseAuthorization();
             app.MapControllers();
             app.Run();
         }
