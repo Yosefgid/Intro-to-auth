@@ -23,12 +23,22 @@ namespace ConferenceManager.Controllers
         [HttpGet]
         public IActionResult GetAllAttendees()
         {
+
+            var roles = HttpContext.User.Claims
+            .Where(c => c.Type == ClaimTypes.Role)
+            .Select(c => c.Value);
+
+            foreach (var item in roles)
+            {
+                Console.WriteLine(item);
+            }
+
             return Ok(_attendeeService.FetchAllAttendees());
 
         }
         [Authorize]
         [HttpGet("{attendeeId}")]
-        public IActionResult GetAllAttendeeById(int attendeeId)
+        public IActionResult GetAttendeeById(int attendeeId)
         {
             var userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var attendee = _attendeeService.FetchAttendeeById(attendeeId);
@@ -53,7 +63,7 @@ namespace ConferenceManager.Controllers
             }
             newAttendee.UserId = int.Parse(userId);
             var created = _attendeeService.AddAttendee(newAttendee);
-            return CreatedAtAction(nameof(GetAllAttendeeById), new { id = newAttendee.AttendeeId }, newAttendee);
+            return CreatedAtAction(nameof(GetAttendeeById), new { id = newAttendee.AttendeeId }, newAttendee);
         }
 
 
@@ -67,7 +77,7 @@ namespace ConferenceManager.Controllers
 
 
 
-        [Authorize(Roles = "Admin"]
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{attendeeId}")]
         public IActionResult DeleteAttendee(int attendeeId)
         {

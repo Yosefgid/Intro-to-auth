@@ -17,7 +17,7 @@ namespace ConferenceManager.Repositories
     }
     public class AttendeeRepo : IAttendeeRepo
     {
-        private readonly string filePath = "/AttendeeData.json";
+        private readonly string filePath = "AttendeeData.json";
         JsonSerializerOptions options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true, WriteIndented = true };
 
 

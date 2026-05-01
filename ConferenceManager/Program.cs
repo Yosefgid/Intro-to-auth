@@ -15,6 +15,10 @@ namespace ConferenceManager
             builder.Services.AddControllers();
             builder.Services.AddScoped<IEventRepo, EventRepo>();
             builder.Services.AddScoped<IEventService, EventService>();
+            builder.Services.AddScoped<IAttendeeRepo, AttendeeRepo>();
+            builder.Services.AddScoped<IAttendeeServices, AttendeeService>();
+            builder.Services.AddScoped<ISpeakerRepo, SpeakerRepo>();
+            builder.Services.AddScoped<ISpeakerService, SpeakerService>();
 
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
@@ -37,7 +41,9 @@ namespace ConferenceManager
                     ValidAudience = "AppName",
                     ValidateLifetime = false,
                     ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(key)
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    RoleClaimType = "roles",
+                
                 };
             });
 
@@ -51,8 +57,8 @@ namespace ConferenceManager
 
 
             app.UseHttpsRedirection();
-            app.UseAuthentication();
             app.UseAuthorization();
+            app.UseAuthentication();
             app.MapControllers();
             app.Run();
         }
